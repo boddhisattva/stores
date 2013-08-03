@@ -1,4 +1,10 @@
 Stores::Application.routes.draw do
+  resources :products
+
+
+  resources :divisions
+
+
   resources :companies
 
 
