@@ -29,6 +29,8 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
+      format.js # new.js.erb --> You don't have to explicity specify it.. its just
+      # that you need to specify
       format.json { render json: @company }
     end
   end

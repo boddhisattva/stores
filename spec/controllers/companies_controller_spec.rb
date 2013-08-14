@@ -57,6 +57,17 @@ describe CompaniesController do
       #response.should be_redirect
     end
 
+    it "should return one of the existing announcements created as part of the before block" do
+      get :show, :id => @comp_obj.id, :format => :json
+      response_body = JSON.parse(response.body)
+      puts "\n*****#{response_body}******\n"
+      #response_body.keys.should =~ %w(contact_no)
+      response_body["contact_no"].should == 222
+      response.should be_success
+      response.status.should == 200
+      #response.should be_redirect
+    end
+
     it "assigns the requested company as @company" do
       company = Company.create! valid_attributes
       get :show, {:id => company.to_param}, valid_session

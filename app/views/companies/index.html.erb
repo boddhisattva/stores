@@ -28,4 +28,6 @@
 
 <br />
 
-<%= link_to 'New Company', new_company_path %>
+<div id="new_company_form"></div>
+<%= link_to 'New Company', new_company_path, :remote => true, :id => "new_link" %>
+
