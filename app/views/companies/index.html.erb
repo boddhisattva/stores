@@ -1,5 +1,5 @@
 <h1>Listing companies</h1>
-
+<!--<div> pls later on check the whether the idea of using a div inside a table makes sense or not-->
 <table>
   <tr>
     <th>Name</th>
@@ -13,7 +13,7 @@
   </tr>
 
 <% @companies.each do |company| %>
-  <tr>
+  <tr id="company_<%=company.id%>">
     <td><%= company.name %></td>
     <td><%= company.contact_no %></td>
     <td><%= company.email_id %></td>
@@ -21,12 +21,18 @@
     <td><%= company.fax_no %></td>
     <td><%= link_to 'Show', company %></td>
     <td><%= link_to 'Edit', edit_company_path(company) %></td>
-    <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></td>
   </tr>
 <% end %>
 </table>
+<!--</div>-->
+<table id="new_company" ></table> <!-- to do You got to see later how can you actuall align it-->
+<form>
+  Dummy Text to check working ajax: <input type="text" name="firstname"><br>
+</form>
 
 <br />
+
 
 <div id="new_company_form"></div>
 <%= link_to 'New Company', new_company_path, :remote => true, :id => "new_link" %>

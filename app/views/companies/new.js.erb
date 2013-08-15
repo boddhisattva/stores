@@ -1,5 +1,10 @@
 //alert("I am in the data remote section")
 //$("#new_link").hide()
-$("#new_link").hide().after($("#new_company_form").html("<%=escape_javascript(render("form")) %>"))
+
+$("#new_link").hide().after($("#new_company_form").html("<%= escape_javascript(render("form")) %>"));
+// below is alternate to using escape_javascript method
+//$("#new_link").hide().after($("#new_company_form").html("<%= j render("form") %>"));
+
+
 
 

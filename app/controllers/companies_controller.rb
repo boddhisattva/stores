@@ -50,6 +50,7 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       if @company.save
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
+        format.js
         format.json { render json: @company, status: :created, location: @company }
       else
         format.html { render action: "new" }
@@ -82,6 +83,7 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to companies_url }
+      format.js
       format.json { head :no_content }
     end
   end

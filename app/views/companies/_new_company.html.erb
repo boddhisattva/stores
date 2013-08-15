@@ -1,0 +1,10 @@
+<tr>             <!-- have to link into formatting.. while creating new companies through ajax -->
+  <td><%= @company.name %></td>
+  <td><%= @company.contact_no %></td>
+  <td><%= @company.email_id %></td>
+  <td><%= @company.website %></td>
+  <td><%= @company.fax_no %></td>
+  <td><%= link_to 'Show', @company %></td>
+  <td><%= link_to 'Edit', edit_company_path(@company) %></td>
+  <td><%= link_to 'Destroy', @company, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></td>
+</tr>

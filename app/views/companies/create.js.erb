@@ -1,0 +1,6 @@
+//$("#new_company_form").clearAttributes();// see how you can actually reset the values of all fields..
+//$("#new_company_form").hide();
+//$("#new_company_form").remove(); --> using hide/remove doesn't help rendering new company form again.. do chck why
+$("#new_company_form").html("");
+$("#new_link").show();
+$("#new_company").append("<%= j render("new_company") %>");//.append("<br><div id="new_company_form"></div></br>");
