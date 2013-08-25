@@ -19,7 +19,14 @@
   <b>Price:</b>
   <%= @product.price %>
 </p>
-
+<!--<p>-->
+<!-- image_tag @product.image_url.to_s  to_s to take care of the nil image tag , removed the rails helper kind of tag as don't know exactly
+how to comment that immediately-->
+<!--</p>-->
+<!-- To do , when you have time - definitely try out how to upload the remote image url(can refer back to the carrierwave railscast -->
+<p>
+  <%= image_tag @product.image_url(:thumb).to_s %> <!-- to_s to take care of the nil image tag -->
+</p>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
