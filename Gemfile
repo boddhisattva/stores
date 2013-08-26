@@ -29,6 +29,12 @@ gem 'jquery-rails'
 
 gem 'rspec-rails', :group => [:test,:development]
 
+gem 'ruby-prof', group: :test
+gem 'test-unit', group: :test
+gem "json", "~> 1.8.0"
+gem 'rmagick'
+gem 'carrierwave'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

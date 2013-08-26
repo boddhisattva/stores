@@ -35,6 +35,14 @@ production:
   pool: 5
   timeout: 5000
 
+performance:
+  adapter: mysql2
+  database: stores_perf
+  username: root
+  password: password-1
+  pool: 5
+  timeout: 5000
+
 #  adapter: sqlite3
 #  database: db/production.sqlite3
 #  pool: 5
