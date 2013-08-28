@@ -1,6 +1,8 @@
 class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
+  require 'active_support/builder' unless defined?(Builder)
+  respond_to :html, :json, :js
 
   def index
     @companies = Company.all
@@ -58,6 +60,50 @@ class CompaniesController < ApplicationController
       end
     end
   end
+
+  def company_division_stats
+    @all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').where('divisions.company_id = companies.id').group('companies.id').order('count(divisions.id) DESC')
+
+    #@all_companies = Company.joins(:divisions).select('companies.name as label, count(divisions.id)').where('divisions.company_id = companies.id').group('companies.id').order('count(divisions.id) DESC').count
+
+    #for each_company in @all_companies
+    # puts each_company.name
+    # puts each_company.total
+    #end
+
+    #@referral_source = Client.count(:all, :group => :referral_source)
+    #remap = @all_companies.map {|k, v| { Name: k, Count: v} }
+    #
+    #remap = a.map {|k, v| { Name: k, Count: v} }
+    #
+    #Rails.logger.info "\n*******All companies:- #{@all_companies}********\n"
+
+    respond_to do |format|
+      unless @all_companies.nil?
+        format.json { render json: @all_companies.to_json, status: :created } #in the browser url would be:- localhost:3000/company_division_stats.json
+        #format.json {render 'company_division_stats.json.jbuilder'} - throws error currently
+        format.html #{ redirect_to @company, notice: 'Company was successfully created.' }
+      end
+
+      #if @company.save
+      #  format.html { redirect_to @company, notice: 'Company was successfully created.' }
+      #  format.js
+      #  format.json { render json: @company, status: :created, location: @company }
+      #else
+      #  format.html { render action: "new" }
+      #  format.json { render json: @company.errors, status: :unprocessable_entity }
+      #end
+
+    end
+
+    #for each_company in all_companies
+    #
+    #end
+    #respond_to :json
+    #respond_with @all_companies
+  end
+
+
 
   # PUT /companies/1
   # PUT /companies/1.json

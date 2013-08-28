@@ -5,7 +5,10 @@ Stores::Application.routes.draw do
   resources :divisions
 
 
-  resources :companies
+  resources :companies do
+    #get 'division_stats' => :company_division_stats
+    get 'company_division_stats', :on => :collection
+  end
 
 
   # The priority is based upon order of creation:
