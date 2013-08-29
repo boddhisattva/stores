@@ -36,6 +36,8 @@ gem "rmagick", "~> 2.13.2"
 gem "carrierwave", "~> 0.9.0"
 gem "d3-rails", "~> 0.0.5"
 gem "jbuilder"
+gem "g.raphael-rails", "~> 0.1.0"
+gem "raphael-rails", "~> 2.1.1"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
