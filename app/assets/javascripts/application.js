@@ -12,5 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require raphael-min
+//= require g.raphael
+//= require g.bar
+//=
 //= require_tree .
 

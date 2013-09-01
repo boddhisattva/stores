@@ -63,7 +63,15 @@ class CompaniesController < ApplicationController
 
   def company_division_stats
     @all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').where('divisions.company_id = companies.id').group('companies.id').order('count(divisions.id) DESC')
-
+    #@all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').where('divisions.company_id = companies.id').order('count(divisions.id) DESC').group('companies.id')
+    @the_companies = Company.all
+    @divisions_count = []
+    @divisions_name = []
+    @all_companies.each do |each_company|
+      @divisions_count << each_company.total
+      @divisions_name << each_company.name
+    end
+    print_all_companies(@the_companies) #basically you can pass an entire obj to another method..
     #@all_companies = Company.joins(:divisions).select('companies.name as label, count(divisions.id)').where('divisions.company_id = companies.id').group('companies.id').order('count(divisions.id) DESC').count
 
     #for each_company in @all_companies
@@ -101,6 +109,11 @@ class CompaniesController < ApplicationController
     #end
     #respond_to :json
     #respond_with @all_companies
+  end
+
+  def print_all_companies(cos)
+    Rails.logger.info "\n************\nAll companies:- #{cos}************\n"
+    puts "All companies:- #{cos}"
   end
 
 

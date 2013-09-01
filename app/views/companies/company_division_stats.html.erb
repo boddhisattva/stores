@@ -5,10 +5,9 @@
   <title>Static Bar Charts</title>
   <link rel="stylesheet" href="css/demo.css" type="text/css" media="screen" charset="utf-8">
   <link rel="stylesheet" href="css/demo-print.css" type="text/css" media="print" charset="utf-8">
-  <!-- Throws same error when using the raphael and g.raphael gem-->
-  <!--<script src="https://raw.github.com/DmitryBaranovskiy/g.raphael/master/g.bar.js" type="text/javascript" charset="utf-8"></script>-->
   <!--<script src="https://raw.github.com/DmitryBaranovskiy/g.raphael/master/raphael-min.js" type="text/javascript" charset="utf-8"></script>-->
   <!--<script src="https://raw.github.com/DmitryBaranovskiy/g.raphael/master/g.raphael.js" type="text/javascript" charset="utf-8"></script>-->
+  <!--<script src="https://raw.github.com/DmitryBaranovskiy/g.raphael/master/g.bar.js" type="text/javascript" charset="utf-8"></script>-->
   <script type="text/javascript" charset="utf-8">
       window.onload = function () {
           var r = Raphael("holder"),
@@ -21,8 +20,10 @@
 //          r.text(480, 10, "Multiline Series Chart").attr(txtattr);
 //          r.text(160, 250, "Multiple Series Stacked Chart").attr(txtattr);
 //          r.text(480, 250, 'Multiline Series Stacked Vertical Chart. Type "round"').attr(txtattr);
-
-          r.barchart(10, 10, 300, 220, [[55, 20, 13, 32, 5, 1, 2, 10]], 0, {type: "soft"});
+          var labels = ["Company X", "Company Y", "Company Z"]
+          var barChart = r.barchart(10, 10, 300, 220, [[9,5,2]], 0, {stacked: true, type: "soft"}) .label([labels]);
+          //r.barchart(10, 10, 300, 220, [[55, 20, 13, 32, 5, 1, 2, 10]], 0, {type: "sharp"}).label([['C', 'D', 'E', 'G', 'L', 'M', 'P', 'S1']]);
+          //barChart.label(['a','b','c']);
 //          r.barchart(330, 10, 300, 220, data1);
 //          r.barchart(10, 250, 300, 220, data2, {stacked: true});
 //          r.barchart(330, 250, 300, 220, data3, {stacked: true, type: "round"});
