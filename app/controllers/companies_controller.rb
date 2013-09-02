@@ -62,35 +62,26 @@ class CompaniesController < ApplicationController
   end
 
   def company_division_stats
-    @all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').where('divisions.company_id = companies.id').group('companies.id').order('count(divisions.id) DESC')
-    #@all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').where('divisions.company_id = companies.id').order('count(divisions.id) DESC').group('companies.id')
-    @the_companies = Company.all
-    @divisions_count = []
-    @divisions_name = []
-    @all_companies.each do |each_company|
-      @divisions_count << each_company.total
-      @divisions_name << each_company.name
-    end
-    print_all_companies(@the_companies) #basically you can pass an entire obj to another method..
-    #@all_companies = Company.joins(:divisions).select('companies.name as label, count(divisions.id)').where('divisions.company_id = companies.id').group('companies.id').order('count(divisions.id) DESC').count
+    @all_companies = Company.all
+    Rails.logger.info "\n*******Companies:- #{@all_companies.inspect}*******\n"
 
-    #for each_company in @all_companies
-    # puts each_company.name
-    # puts each_company.total
+    #@all_companies.each do |each_company|
+    #  @companies[each_company.company] = each_company.total
     #end
 
-    #@referral_source = Client.count(:all, :group => :referral_source)
-    #remap = @all_companies.map {|k, v| { Name: k, Count: v} }
-    #
-    #remap = a.map {|k, v| { Name: k, Count: v} }
-    #
+    #@all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').where('divisions.company_id = companies.id').order('count(divisions.id) DESC').group('companies.id')
+
+    #@remap = @all_companies.map {|k, v| { Name: k, Count: v} }
+    #@remap = a.map {|k, v| { Name: k, Count: v} }
+    @all_companies = @all_companies.map {|each_company| { Country: each_company.name, Visits: each_company.divisions_count} }
+
     #Rails.logger.info "\n*******All companies:- #{@all_companies}********\n"
 
     respond_to do |format|
       unless @all_companies.nil?
-        format.json { render json: @all_companies.to_json, status: :created } #in the browser url would be:- localhost:3000/company_division_stats.json
-        #format.json {render 'company_division_stats.json.jbuilder'} - throws error currently
-        format.html #{ redirect_to @company, notice: 'Company was successfully created.' }
+        format.html
+        format.json { render json: @all_companies, status: :created } #in the browser url would be:- localhost:3000/company_division_stats.json
+        #format.json { render json: @all_companies.to_json, status: :created }
       end
 
       #if @company.save
@@ -101,7 +92,6 @@ class CompaniesController < ApplicationController
       #  format.html { render action: "new" }
       #  format.json { render json: @company.errors, status: :unprocessable_entity }
       #end
-
     end
 
     #for each_company in all_companies
@@ -111,6 +101,7 @@ class CompaniesController < ApplicationController
     #respond_with @all_companies
   end
 
+  #print_all_companies(@the_companies) #basically you can pass an entire obj to another method..
   def print_all_companies(cos)
     Rails.logger.info "\n************\nAll companies:- #{cos}************\n"
     puts "All companies:- #{cos}"
