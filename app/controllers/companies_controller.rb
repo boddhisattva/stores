@@ -62,43 +62,21 @@ class CompaniesController < ApplicationController
   end
 
   def company_division_stats
-    @all_companies = Company.all
+    @all_companies = Company.all # Option 1
     Rails.logger.info "\n*******Companies:- #{@all_companies.inspect}*******\n"
 
-    #@all_companies.each do |each_company|
-    #  @companies[each_company.company] = each_company.total
-    #end
-
     #@all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').where('divisions.company_id = companies.id').order('count(divisions.id) DESC').group('companies.id')
+    #http://stackoverflow.com/questions/17598898/preparing-data-to-plot-in-d3-js-from-ruby-on-rails-database
 
-    #@remap = @all_companies.map {|k, v| { Name: k, Count: v} }
-    #@remap = a.map {|k, v| { Name: k, Count: v} }
-    @all_companies = @all_companies.map {|each_company| { Country: each_company.name, Visits: each_company.divisions_count} }
-
-    #Rails.logger.info "\n*******All companies:- #{@all_companies}********\n"
+    @specific_details = @all_companies.map {|each_company| { Country: each_company.name, Visits: each_company.divisions_count} } # Option 2
 
     respond_to do |format|
       unless @all_companies.nil?
         format.html
-        format.json { render json: @all_companies, status: :created } #in the browser url would be:- localhost:3000/company_division_stats.json
+        format.json { render json: @specific_details, status: :created } #in the browser url would be:- localhost:3000/company_division_stats.json
         #format.json { render json: @all_companies.to_json, status: :created }
       end
-
-      #if @company.save
-      #  format.html { redirect_to @company, notice: 'Company was successfully created.' }
-      #  format.js
-      #  format.json { render json: @company, status: :created, location: @company }
-      #else
-      #  format.html { render action: "new" }
-      #  format.json { render json: @company.errors, status: :unprocessable_entity }
-      #end
     end
-
-    #for each_company in all_companies
-    #
-    #end
-    #respond_to :json
-    #respond_with @all_companies
   end
 
   #print_all_companies(@the_companies) #basically you can pass an entire obj to another method..
