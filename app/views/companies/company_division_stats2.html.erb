@@ -9,13 +9,15 @@
   <script type="text/javascript">
       var chart;
 
-      //required format
       //var chartData = [{country: "Samsung", visits: 8}, {country: "Natraj", visits: 2}, {country: "Tupperware", visits: 5}, {country: "Transcen", visits: 0}, {country: "camlin", visits: 0}]
 
+      //var chartData = [{country: Samsung, visits: 8}, {country: Natraj, visits: 2}]//, {country: "Tupperware", visits: 5}, {country: "Transcen", visits: 0}, {country: "camlin", visits: 0}]
 
-      var chartData = <%= convert_to_amcharts_json(@all_companies) %>
-      //var chartData = = @all_companies.to_json.html_safe %>
-          //to_json.gsub(/\"country\"/, "country").gsub(/\"visits\"/, "visits")
+      //var chart_data = = render 'data.json.erb', :format => :json, :locals => {:all_companies => @companies_data} %>
+
+
+      var chartData = <%= @all_companies.to_json.html_safe %>
+              //to_json.gsub(/\"country\"/, "country").gsub(/\"visits\"/, "visits")
 
 //      var chartData = [{
 //          country: "USA",
@@ -71,34 +73,34 @@
 //      }];
 
 
-              AmCharts.ready(function () {
-                  // SERIAL CHART
-                  chart = new AmCharts.AmSerialChart();
-                  chart.dataProvider = chartData;
-                  chart.categoryField = "country";
-                  chart.startDuration = 1;
+      AmCharts.ready(function () {
+          // SERIAL CHART
+          chart = new AmCharts.AmSerialChart();
+          chart.dataProvider = chartData;
+          chart.categoryField = "country";
+          chart.startDuration = 1;
 
-                  // AXES
-                  // category
-                  var categoryAxis = chart.categoryAxis;
-                  categoryAxis.labelRotation = 90;
-                  categoryAxis.gridPosition = "start";
+          // AXES
+          // category
+          var categoryAxis = chart.categoryAxis;
+          categoryAxis.labelRotation = 90;
+          categoryAxis.gridPosition = "start";
 
-                  // value
-                  // in case you don't want to change default settings of value axis,
-                  // you don't need to create it, as one value axis is created automatically.
+          // value
+          // in case you don't want to change default settings of value axis,
+          // you don't need to create it, as one value axis is created automatically.
 
-                  // GRAPH
-                  var graph = new AmCharts.AmGraph();
-                  graph.valueField = "visits";
-                  graph.balloonText = "[[category]]: [[value]]";
-                  graph.type = "column";
-                  graph.lineAlpha = 0;
-                  graph.fillAlphas = 0.8;
-                  chart.addGraph(graph);
+          // GRAPH
+          var graph = new AmCharts.AmGraph();
+          graph.valueField = "visits";
+          graph.balloonText = "[[category]]: [[value]]";
+          graph.type = "column";
+          graph.lineAlpha = 0;
+          graph.fillAlphas = 0.8;
+          chart.addGraph(graph);
 
-                  chart.write("chartdiv");
-              });
+          chart.write("chartdiv");
+      });
   </script>
 </head>
 

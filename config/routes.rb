@@ -8,6 +8,8 @@ Stores::Application.routes.draw do
   resources :companies do
     #get 'division_stats' => :company_division_stats
     get 'company_division_stats', :on => :collection
+    get 'company_division_stats2', :on => :collection
+    #get 'company_division_stats3', :on => :collection
   end
 
 

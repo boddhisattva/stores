@@ -62,19 +62,43 @@ class CompaniesController < ApplicationController
   end
 
   def company_division_stats
-    @all_companies = Company.all # Option 1
-    Rails.logger.info "\n*******Companies:- #{@all_companies.inspect}*******\n"
+    @all_companies = @companies_data = Company.all # Option 1
+    #Rails.logger.info "\n*******Companies:- #{@all_companies.inspect}*******\n"
 
     #@all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').where('divisions.company_id = companies.id').order('count(divisions.id) DESC').group('companies.id')
     #http://stackoverflow.com/questions/17598898/preparing-data-to-plot-in-d3-js-from-ruby-on-rails-database
 
-    @specific_details = @all_companies.map {|each_company| { Country: each_company.name, Visits: each_company.divisions_count} } # Option 2
+    @specific_details = @all_companies = @all_companies.map {|each_company| { country: each_company.name, visits: each_company.divisions_count} } # Option 2
+    #@all_companies = @all_companies.to_s.gsub(":","")
+    #@all_companies = @all_companies.gsub("=>",": ")
 
     respond_to do |format|
       unless @all_companies.nil?
         format.html
         format.json { render json: @specific_details, status: :created } #in the browser url would be:- localhost:3000/company_division_stats.json
         #format.json { render json: @all_companies.to_json, status: :created }
+      end
+    end
+  end
+
+  def company_division_stats2
+    @all_companies = @companies_data = Company.all
+    @specific_details = @all_companies = @all_companies.map {|each_company| { country: each_company.name, visits: each_company.divisions_count} } # Option 2
+    respond_to do |format|
+      unless @all_companies.nil?
+        format.html
+        format.json { render json: @specific_details, status: :created }
+      end
+    end
+  end
+
+  def company_division_stats3
+    @all_companies = @companies_data = Company.all
+    #@specific_details = @all_companies = @all_companies.map {|each_company| { country: each_company.name, visits: each_company.divisions_count} } # Option 2
+    respond_to do |format|
+      unless @all_companies.nil?
+        format.html
+        #format.json { render json: @specific_details, status: :created }
       end
     end
   end
