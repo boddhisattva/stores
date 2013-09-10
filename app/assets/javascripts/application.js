@@ -12,9 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require raphael-min
-//= require g.raphael
-//= require g.bar
 //= require amcharts
 //= require_tree .
 

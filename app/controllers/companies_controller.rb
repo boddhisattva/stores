@@ -66,9 +66,15 @@ class CompaniesController < ApplicationController
     #Rails.logger.info "\n*******Companies:- #{@all_companies.inspect}*******\n"
 
     #@all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').where('divisions.company_id = companies.id').order('count(divisions.id) DESC').group('companies.id')
+    #where clause unncessary above..
+    #@all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').order('count(divisions.id) DESC').group('companies.id')
+    #with having clause
+    #@all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').order('count(divisions.id) DESC').group('companies.id').having('count(total) > 3')
+
     #http://stackoverflow.com/questions/17598898/preparing-data-to-plot-in-d3-js-from-ruby-on-rails-database
 
-    @specific_details = @all_companies = @all_companies.map {|each_company| { country: each_company.name, visits: each_company.divisions_count} } # Option 2
+#   @specific_details = @all_companies = @all_companies.map {|each_company| { country: each_company.name, visits: each_company.divisions_count} } # Option 2
+    @specific_details = @all_companies = @all_companies.map {|each_company| { name: each_company.name, divisions_count: each_company.divisions_count} } # Option 2
     #@all_companies = @all_companies.to_s.gsub(":","")
     #@all_companies = @all_companies.gsub("=>",": ")
 
@@ -92,14 +98,14 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def company_division_stats3
-    @all_companies = @companies_data = Company.all
+  def company_division_stats4
+    #@all_companies = @companies_data = Company.all
     #@specific_details = @all_companies = @all_companies.map {|each_company| { country: each_company.name, visits: each_company.divisions_count} } # Option 2
     respond_to do |format|
-      unless @all_companies.nil?
+      #unless @all_companies.nil?
         format.html
         #format.json { render json: @specific_details, status: :created }
-      end
+      #end
     end
   end
 

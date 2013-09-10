@@ -1,8 +1,0 @@
-<%=
-  Jbuilder.encode do |json|
-      json.countries @all_companies do |json, company|
-        json.country company.name
-        json.visits company.divisions_count
-      end
-  end
-%>

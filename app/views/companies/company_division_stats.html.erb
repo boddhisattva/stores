@@ -75,7 +75,7 @@
                   // SERIAL CHART
                   chart = new AmCharts.AmSerialChart();
                   chart.dataProvider = chartData;
-                  chart.categoryField = "country";
+                  chart.categoryField = "name";
                   chart.startDuration = 1;
 
                   // AXES
@@ -90,7 +90,7 @@
 
                   // GRAPH
                   var graph = new AmCharts.AmGraph();
-                  graph.valueField = "visits";
+                  graph.valueField = "divisions_count";
                   graph.balloonText = "[[category]]: [[value]]";
                   graph.type = "column";
                   graph.lineAlpha = 0;
@@ -103,7 +103,7 @@
 </head>
 
 <body>
-<div id="chartdiv" style="width: 100%; height: 400px;"></div>
+<div id="chartdiv" style="width: 60%; height: 400px;" ></div>
 </body>
 
 </html>

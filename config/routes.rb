@@ -9,9 +9,18 @@ Stores::Application.routes.draw do
     #get 'division_stats' => :company_division_stats
     get 'company_division_stats', :on => :collection
     get 'company_division_stats2', :on => :collection
-    #get 'company_division_stats3', :on => :collection
+    get 'company_division_stats4', :on => :collection
   end
 
+  namespace :api do
+    #resources :abcd do
+    #  get :apiv_version, :on => :collection
+    #end
+    namespace :v0 do
+      get "/users/:username" => 'compan#show'#, :as => 'user'
+      #get "/tags/:name" => 'tags#show', :as => 'tag'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
