@@ -9,69 +9,8 @@
   <script type="text/javascript">
       var chart;
 
-      //var chartData = [{country: "Samsung", visits: 8}, {country: "Natraj", visits: 2}, {country: "Tupperware", visits: 5}, {country: "Transcen", visits: 0}, {country: "camlin", visits: 0}]
-
-      //var chartData = [{country: Samsung, visits: 8}, {country: Natraj, visits: 2}]//, {country: "Tupperware", visits: 5}, {country: "Transcen", visits: 0}, {country: "camlin", visits: 0}]
-
-      //var chart_data = = render 'data.json.erb', :format => :json, :locals => {:all_companies => @companies_data} %>
-
-
       var chartData = <%= @all_companies.to_json.html_safe %>
               //to_json.gsub(/\"country\"/, "country").gsub(/\"visits\"/, "visits")
-
-//      var chartData = [{
-//          country: "USA",
-//          visits: 4025
-//      }, {
-//          country: "China",
-//          visits: 1882
-//      }, {
-//          country: "Japan",
-//          visits: 1809
-//      }, {
-//          country: "Germany",
-//          visits: 1322
-//      }, {
-//          country: "UK",
-//          visits: 1122
-//      }, {
-//          country: "France",
-//          visits: 1114
-//      }, {
-//          country: "India",
-//          visits: 984
-//      }, {
-//          country: "Spain",
-//          visits: 711
-//      }, {
-//          country: "Netherlands",
-//          visits: 665
-//      }, {
-//          country: "Russia",
-//          visits: 580
-//      }, {
-//          country: "South Korea",
-//          visits: 443
-//      }, {
-//          country: "Canada",
-//          visits: 441
-//      }, {
-//          country: "Brazil",
-//          visits: 395
-//      }, {
-//          country: "Italy",
-//          visits: 386
-//      }, {
-//          country: "Australia",
-//          visits: 384
-//      }, {
-//          country: "Taiwan",
-//          visits: 338
-//      }, {
-//          country: "Poland",
-//          visits: 328
-//      }];
-
 
       AmCharts.ready(function () {
           // SERIAL CHART
