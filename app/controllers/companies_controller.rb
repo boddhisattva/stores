@@ -62,34 +62,24 @@ class CompaniesController < ApplicationController
   end
 
   def company_division_stats
-    @all_companies = @companies_data = Company.all # Option 1
-    #Rails.logger.info "\n*******Companies:- #{@all_companies.inspect}*******\n"
-
-    #@all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').where('divisions.company_id = companies.id').order('count(divisions.id) DESC').group('companies.id')
-    #where clause unncessary above..
-    #@all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').order('count(divisions.id) DESC').group('companies.id')
-    #with having clause
-    #@all_companies = Company.joins(:divisions).select('companies.name, count(divisions.id) as total').order('count(divisions.id) DESC').group('companies.id').having('count(total) > 3')
-
-    #http://stackoverflow.com/questions/17598898/preparing-data-to-plot-in-d3-js-from-ruby-on-rails-database
-
-#   @specific_details = @all_companies = @all_companies.map {|each_company| { country: each_company.name, visits: each_company.divisions_count} } # Option 2
+    @all_companies = @companies_data = Company.all
     @specific_details = @all_companies = @all_companies.map {|each_company| { name: each_company.name, divisions_count: each_company.divisions_count} } # Option 2
-    #@all_companies = @all_companies.to_s.gsub(":","")
-    #@all_companies = @all_companies.gsub("=>",": ")
-
+    @x_axis_title = "Company Name"
+    @y_axis_title =  "Number of Divisions"
     respond_to do |format|
       unless @all_companies.nil?
         format.html
-        format.json { render json: @specific_details, status: :created } #in the browser url would be:- localhost:3000/company_division_stats.json
-        #format.json { render json: @all_companies.to_json, status: :created }
+        format.json { render json: @specific_details, status: :created }
+        #in the browser, the url would be:- localhost:3000/company_division_stats.json
       end
     end
   end
 
   def company_division_stats2
     @all_companies = @companies_data = Company.all
-    @specific_details = @all_companies = @all_companies.map {|each_company| { country: each_company.name, visits: each_company.divisions_count} } # Option 2
+    @specific_details = @all_companies = @all_companies.map {|each_company| { name: each_company.name, divisions_count: each_company.divisions_count} } # Option 2
+    @x_axis_title = "Company Name"
+    @y_axis_title =  "Number of Divisions"
     respond_to do |format|
       unless @all_companies.nil?
         format.html
@@ -98,14 +88,10 @@ class CompaniesController < ApplicationController
     end
   end
 
+  # using sample static data
   def company_division_stats4
-    #@all_companies = @companies_data = Company.all
-    #@specific_details = @all_companies = @all_companies.map {|each_company| { country: each_company.name, visits: each_company.divisions_count} } # Option 2
     respond_to do |format|
-      #unless @all_companies.nil?
         format.html
-        #format.json { render json: @specific_details, status: :created }
-      #end
     end
   end
 

@@ -12,64 +12,9 @@
       //required format
       //var chartData = [{country: "Samsung", visits: 8}, {country: "Natraj", visits: 2}, {country: "Tupperware", visits: 5}, {country: "Transcen", visits: 0}, {country: "camlin", visits: 0}]
 
-
       var chartData = <%= convert_to_amcharts_json(@all_companies) %>
-      //var chartData = = @all_companies.to_json.html_safe %>
-          //to_json.gsub(/\"country\"/, "country").gsub(/\"visits\"/, "visits")
-
-//      var chartData = [{
-//          country: "USA",
-//          visits: 4025
-//      }, {
-//          country: "China",
-//          visits: 1882
-//      }, {
-//          country: "Japan",
-//          visits: 1809
-//      }, {
-//          country: "Germany",
-//          visits: 1322
-//      }, {
-//          country: "UK",
-//          visits: 1122
-//      }, {
-//          country: "France",
-//          visits: 1114
-//      }, {
-//          country: "India",
-//          visits: 984
-//      }, {
-//          country: "Spain",
-//          visits: 711
-//      }, {
-//          country: "Netherlands",
-//          visits: 665
-//      }, {
-//          country: "Russia",
-//          visits: 580
-//      }, {
-//          country: "South Korea",
-//          visits: 443
-//      }, {
-//          country: "Canada",
-//          visits: 441
-//      }, {
-//          country: "Brazil",
-//          visits: 395
-//      }, {
-//          country: "Italy",
-//          visits: 386
-//      }, {
-//          country: "Australia",
-//          visits: 384
-//      }, {
-//          country: "Taiwan",
-//          visits: 338
-//      }, {
-//          country: "Poland",
-//          visits: 328
-//      }];
-
+      var x_axis_title = "<%=@x_axis_title %>"
+      var y_axis_title = "<%=@y_axis_title%>"
 
               AmCharts.ready(function () {
                   // SERIAL CHART
@@ -77,16 +22,23 @@
                   chart.dataProvider = chartData;
                   chart.categoryField = "name";
                   chart.startDuration = 1;
+                  // Adding 3D capabilities
+                  chart.depth3D = 20;
+                  chart.angle = 30;
 
                   // AXES
                   // category
                   var categoryAxis = chart.categoryAxis;
                   categoryAxis.labelRotation = 90;
                   categoryAxis.gridPosition = "start";
+                  categoryAxis.title= x_axis_title
 
                   // value
                   // in case you don't want to change default settings of value axis,
                   // you don't need to create it, as one value axis is created automatically.
+                  var valueAxis = new AmCharts.ValueAxis();
+                  valueAxis.title = y_axis_title
+                  chart.addValueAxis(valueAxis);
 
                   // GRAPH
                   var graph = new AmCharts.AmGraph();
@@ -103,7 +55,9 @@
 </head>
 
 <body>
-<div id="chartdiv" style="width: 60%; height: 400px;" ></div>
+<h1 align="center">Company Divisions Count
+  <div align="center" id="chartdiv" style="width: 60%; height: 400px;"></div>
+</h1>
 </body>
 
 </html>
