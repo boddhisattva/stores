@@ -31,7 +31,7 @@ gem 'rspec-rails', :group => [:test,:development]
 
 gem 'ruby-prof', group: :test
 gem 'test-unit', group: :test
-gem "json", "~> 1.8.0"
+gem "json", "~> 1.8.6"
 gem "rmagick", "~> 2.13.2"
 gem "carrierwave", "~> 0.9.0"
 gem "d3-rails", "~> 0.0.5"
